@@ -10,6 +10,7 @@ HEIGHT = 900  # ゲームウィンドウの高さ
 NUM_OF_BOMBS = 5  # 爆弾の数
 
 
+
 def check_bound(area: pg.Rect, obj: pg.Rect) -> tuple[bool, bool]:
     """
     オブジェクトが画面内か画面外かを判定し，真理値タプルを返す
@@ -128,7 +129,8 @@ class Beam:
     ビームに関するクラス
     """
     def __init__(self, bird:Bird):
-        self._img = pg.image.load(f"ex03/fig/beam.png")
+        for i in range(5):
+            self._img = pg.image.load(f"ex03/fig/beam.png")
         self._rct = self._img.get_rect()
         self._rct.centerx = bird._rct.centerx + 100
         self._rct.centery = bird._rct.centery
@@ -152,6 +154,7 @@ def main():
     bird = Bird(3, (900, 400))
     bombs = [Bomb() for _ in range(NUM_OF_BOMBS)]
     beam = None
+    beams = []
 
     tmr = 0
     while True:
@@ -160,6 +163,8 @@ def main():
                 return
             if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
                 beam = Beam(bird)
+                beams.append(beam)
+                print(beams)
         tmr += 1
         screen.blit(bg_img, [0, 0])
 
@@ -183,9 +188,11 @@ def main():
                     del bombs[i]
                     bird.change_img(6, screen)
                     break
+        
 
         pg.display.update()
         clock.tick(1000)
+    
 
         
 
