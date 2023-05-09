@@ -188,13 +188,9 @@ def main():
                     del bombs[i]
                     bird.change_img(6, screen)
                     break
-        
 
         pg.display.update()
         clock.tick(1000)
-    
-
-        
 
 
 if __name__ == "__main__":
